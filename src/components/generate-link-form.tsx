@@ -29,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { permanentRedirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   date: z.date({
@@ -70,7 +70,7 @@ function createDateFromComponents(
 }
 
 export function GenerateLinkForm() {
-    const router = useRouter();
+  const router = useRouter();
   const yesterdayDate = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
   const tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -88,7 +88,7 @@ export function GenerateLinkForm() {
       formDate.hours,
       formDate.minutes
     );
-    router.push('/countdown?date=' + date.toISOString());
+    router.push("/countdown?date=" + date.toISOString());
   }
 
   return (
