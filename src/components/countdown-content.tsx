@@ -1,14 +1,12 @@
 // CountdownContent.tsx
 "use client";
 
-import isoStringToDate from "@/utils/iso-string-to-date";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function CountdownContent() {
   const searchParams = useSearchParams();
   const dateParam = searchParams.get("date") || "2030-05-01T00:00:00.000Z";
-  const targetDate = isoStringToDate(dateParam);
   const [timeRemaining, setTimeRemaining] = useState({
     years: 0,
     months: 0,
@@ -22,7 +20,7 @@ export default function CountdownContent() {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
+      const distance = new Date(dateParam).getTime() - now;
 
       if (distance < 0) {
         clearInterval(interval);
@@ -45,7 +43,7 @@ export default function CountdownContent() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [targetDate]);
+  }, [dateParam]);
 
   const formatTime = () => {
     const { years, months, days, hours, minutes, seconds } = timeRemaining;

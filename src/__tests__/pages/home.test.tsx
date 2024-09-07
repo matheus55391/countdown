@@ -20,5 +20,5 @@ it("renders h1 title", () => {
   render(<Home />);
   const title = screen.getByText("Countdown Timer");
   expect(title).toBeInTheDocument();
-  
+
 });
